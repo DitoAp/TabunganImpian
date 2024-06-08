@@ -1,0 +1,8 @@
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+    <solid android:color="?attr/colorPrimary" /> <!-- Warna latar belakang, disesuaikan dengan colorPrimary -->
+    <corners
+        android:topLeftRadius="0dp"
+        android:topRightRadius="0dp"
+        android:bottomLeftRadius="30dp"
+        android:bottomRightRadius="30dp" /> <!-- Radius lengkungan hanya di bagian bawah -->
+</shape>

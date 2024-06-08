@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="purple_500">#7E57C2</color>
+    <color name="colorPrimaryDark">#FF000000</color>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorAccent">#FF4081</color>
+    <color name="colorFab">#7774FF</color>
+    <color name="editTextBackground">#E0E0E0</color>
+    <color name="textColor">#000000</color>
+    <color name="textColorHint">#000000</color> <!-- Warna teks hint -->
+    <color name="textColorHintActive">#000000</color>
+</resources>

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Base application theme -->
+    <style name="AppTheme" parent="Theme.Material3.DayNight.NoActionBar">
+        <!-- Customize your theme here -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <!-- Set font family to Poppins -->
+        <item name="android:fontFamily">@font/poppinsregular</item>
+    </style>
+
+    <!-- Style for Toolbar -->
+    <style name="ToolbarTheme" parent="Widget.AppCompat.Toolbar">
+        <!-- Set font family to Poppins for Toolbar -->
+        <item name="android:fontFamily">@font/poppinsmedium</item>
+    </style>
+
+    <!-- Style for TabLayout -->
+    <style name="TabLayoutTheme" parent="Widget.Design.TabLayout">
+        <!-- Set font family to Poppins for TabLayout -->
+        <item name="android:fontFamily">@font/poppinsmedium</item>
+        <!-- Add your previous tab layout styles here -->
+        <!-- For example: -->
+    </style>
+
+    <!-- Style for TextInputEditText -->
+    <style name="Widget.MaterialComponents.TextInputEditText" parent="Widget.AppCompat.EditText">
+        <!-- Set font family to Poppins -->
+        <item name="android:fontFamily">@font/poppinsregular</item>
+        <item name="android:background">@drawable/edit_text_background</item>
+        <item name="android:textColor">@color/textColor</item>
+    </style>
+
+    <style name="MyTextInputLayout" parent="Widget.MaterialComponents.TextInputLayout.FilledBox">
+        <!-- Style untuk teks hint saat aktif -->
+        <item name="hintTextAppearance">@style/MyTextInputLayoutHintText</item>
+        <!-- Style untuk teks input saat aktif -->
+        <item name="android:textColorHint">@color/textColorHint</item>
+    </style>
+
+    <style name="MyTextInputLayoutHintText" parent="TextAppearance.Design.Hint">
+        <!-- Style teks hint saat aktif -->
+        <item name="android:textColor">@color/textColorHintActive</item>
+    </style>
+
+    <!-- Style for Splash Screen -->
+    <style name="SplashTheme" parent="Theme.Material3.DayNight.NoActionBar">
+        <item name="android:windowBackground">@drawable/splash_background</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
+    </style>
+
+</resources>

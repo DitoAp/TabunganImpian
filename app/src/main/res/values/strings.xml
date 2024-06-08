@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Tabungan Impian</string>
+    <string name="add_label">Tambah</string> <!-- Teks untuk FAB -->
+    <string name="add_icon_description">Tambahkan</string> <!-- Deskripsi konten ikon -->
+    <string name="select_photo">Select Photo</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>

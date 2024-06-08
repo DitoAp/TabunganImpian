@@ -1,0 +1,226 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".NewPageActivity">
+
+  <!-- Toolbar -->
+  <include
+      layout="@layout/my_toolbar"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      app:layout_constraintTop_toTopOf="parent" />
+
+  <!-- CardView untuk bingkai gambar -->
+  <androidx.cardview.widget.CardView
+      android:id="@+id/photoCardView"
+      android:layout_width="150dp"
+      android:layout_height="150dp"
+      android:layout_marginTop="16dp"
+      app:cardCornerRadius="16dp"
+      app:cardElevation="4dp"
+      app:layout_constraintTop_toBottomOf="@id/myToolbar"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintEnd_toEndOf="parent">
+
+    <!-- ImageView untuk menampilkan dan memilih foto -->
+    <ImageView
+        android:id="@+id/photoImageView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@drawable/plus"
+        android:scaleType="centerCrop"
+        android:contentDescription="@string/select_photo" />
+  </androidx.cardview.widget.CardView>
+
+  <!-- Teks di atas kolom inputan Nama -->
+  <TextView
+      android:id="@+id/nameLabel"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:text="Nama :"
+      android:textColor="@color/colorPrimaryDark"
+      android:textSize="16sp"
+      app:layout_constraintTop_toBottomOf="@id/photoCardView"
+      app:layout_constraintStart_toStartOf="parent"
+      android:layout_marginTop="16dp"
+      android:layout_marginStart="24dp"
+      android:fontFamily="@font/poppinsmedium" />
+
+  <!-- Kolom input untuk Nama -->
+  <com.google.android.material.textfield.TextInputLayout
+      android:id="@+id/nameInputLayout"
+      android:layout_width="0dp"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="8dp"
+      app:layout_constraintTop_toBottomOf="@id/nameLabel"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintEnd_toEndOf="parent"
+      android:layout_marginStart="24dp"
+      android:layout_marginEnd="24dp"
+      app:boxCornerRadiusBottomEnd="10dp"
+      app:boxCornerRadiusBottomStart="10dp"
+      app:boxCornerRadiusTopEnd="10dp"
+      app:boxCornerRadiusTopStart="10dp"
+      app:hintEnabled="false">
+
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/nameEditText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Masukkan Nama Anda"
+        android:textColor="@color/textColor"
+        android:fontFamily="@font/poppinsregular"
+        android:padding="10dp"
+        style="@style/Widget.MaterialComponents.TextInputEditText" />
+  </com.google.android.material.textfield.TextInputLayout>
+
+  <!-- Teks di atas kolom inputan Target -->
+  <TextView
+      android:id="@+id/targetLabel"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:text="Target :"
+      android:textColor="@color/colorPrimaryDark"
+      android:textSize="16sp"
+      app:layout_constraintTop_toBottomOf="@id/nameInputLayout"
+      app:layout_constraintStart_toStartOf="parent"
+      android:layout_marginTop="16dp"
+      android:layout_marginStart="24dp"
+      android:fontFamily="@font/poppinsmedium" />
+
+  <!-- Kolom input untuk Target -->
+  <com.google.android.material.textfield.TextInputLayout
+      android:id="@+id/targetInputLayout"
+      android:layout_width="0dp"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="8dp"
+      app:layout_constraintTop_toBottomOf="@id/targetLabel"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintEnd_toEndOf="parent"
+      android:layout_marginStart="24dp"
+      android:layout_marginEnd="24dp"
+      app:boxCornerRadiusBottomEnd="10dp"
+      app:boxCornerRadiusBottomStart="10dp"
+      app:boxCornerRadiusTopEnd="10dp"
+      app:boxCornerRadiusTopStart="10dp"
+      app:hintEnabled="false">
+
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/targetEditText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Rp"
+        android:textColor="@color/textColor"
+        android:fontFamily="@font/poppinsregular"
+        android:padding="10dp"
+        style="@style/Widget.MaterialComponents.TextInputEditText" />
+  </com.google.android.material.textfield.TextInputLayout>
+
+  <!-- Teks di atas kolom inputan Tipe -->
+  <TextView
+      android:id="@+id/tipeLabel"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:text="Tipe :"
+      android:textColor="@color/colorPrimaryDark"
+      android:textSize="16sp"
+      app:layout_constraintTop_toBottomOf="@id/targetInputLayout"
+      app:layout_constraintStart_toStartOf="parent"
+      android:layout_marginTop="16dp"
+      android:layout_marginStart="24dp"
+      android:fontFamily="@font/poppinsmedium" />
+
+  <!-- Dropdown untuk Tipe -->
+  <com.google.android.material.textfield.TextInputLayout
+      android:id="@+id/tipeInputLayout"
+      android:layout_width="0dp"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="8dp"
+      app:layout_constraintTop_toBottomOf="@id/tipeLabel"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintEnd_toEndOf="parent"
+      android:layout_marginStart="24dp"
+      android:layout_marginEnd="24dp"
+      app:boxCornerRadiusBottomEnd="10dp"
+      app:boxCornerRadiusBottomStart="10dp"
+      app:boxCornerRadiusTopEnd="10dp"
+      app:boxCornerRadiusTopStart="10dp">
+
+    <MultiAutoCompleteTextView
+        android:id="@+id/tipeAutoCompleteTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/textColor"
+        android:fontFamily="@font/poppinsregular"
+        android:padding="10dp"
+        style="@style/Widget.MaterialComponents.TextInputEditText" />
+  </com.google.android.material.textfield.TextInputLayout>
+
+
+  <!-- Teks di atas kolom inputan Menabung -->
+  <TextView
+      android:id="@+id/menabungLabel"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:text="Menabung :"
+      android:textColor="@color/colorPrimaryDark"
+      android:textSize="16sp"
+      app:layout_constraintTop_toBottomOf="@id/tipeInputLayout"
+      app:layout_constraintStart_toStartOf="parent"
+      android:layout_marginTop="16dp"
+      android:layout_marginStart="24dp"
+      android:fontFamily="@font/poppinsmedium" />
+
+  <!-- Kolom input untuk Menabung -->
+  <com.google.android.material.textfield.TextInputLayout
+      android:id="@+id/menabungInputLayout"
+      android:layout_width="0dp"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="8dp"
+      app:layout_constraintTop_toBottomOf="@id/menabungLabel"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintEnd_toEndOf="parent"
+      android:layout_marginStart="24dp"
+      android:layout_marginEnd="24dp"
+      app:boxCornerRadiusBottomEnd="10dp"
+      app:boxCornerRadiusBottomStart="10dp"
+      app:boxCornerRadiusTopEnd="10dp"
+      app:boxCornerRadiusTopStart="10dp"
+      app:hintEnabled="false">
+
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/menabungEditText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Rp"
+        android:textColor="@color/textColor"
+        android:fontFamily="@font/poppinsregular"
+        android:padding="10dp"
+        style="@style/Widget.MaterialComponents.TextInputEditText" />
+  </com.google.android.material.textfield.TextInputLayout>
+
+  <!-- Tombol Simpan -->
+  <Button
+      android:id="@+id/saveButton"
+      android:layout_width="0dp"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="24dp"
+      android:layout_marginStart="24dp"
+      android:layout_marginEnd="24dp"
+      android:layout_marginBottom="24dp"
+      android:backgroundTint="@color/colorPrimary"
+      android:text="Simpan"
+      android:textColor="@android:color/white"
+      android:textAllCaps="false"
+      android:fontFamily="@font/poppinsmedium"
+      android:padding="16dp"
+      app:layout_constraintTop_toBottomOf="@id/menabungInputLayout"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintBottom_toBottomOf="parent"
+      app:cornerRadius="16dp" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
