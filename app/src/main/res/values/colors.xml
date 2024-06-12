@@ -12,4 +12,8 @@
     <color name="textColorHint">#000000</color> <!-- Warna teks hint -->
     <color name="textColorHintActive">#000000</color>
     <color name="navy">#102C57</color>
+    <color name="popup_background">#FFFFFF</color>
+    <color name="edittext_background">#FFFFFF</color>
+    <color name="button_background_normal">#1976D2</color>
+    <color name="button_background_pressed">#1565C0</color>
 </resources>

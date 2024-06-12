@@ -16,6 +16,11 @@ class FirstPageFragment : Fragment() {
 
     private lateinit var textView: TextView
     private lateinit var photoImageView: ImageView
+    private var currentTitle: String? = null
+    private var currentTarget: String? = null
+    private var currentSaving: String? = null
+    private var currentTipe: String? = null
+    private var currentImageUri: String? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -38,16 +43,36 @@ class FirstPageFragment : Fragment() {
             startActivityForResult(intent, MainActivity.REQUEST_CODE_NEW_PAGE)
         }
 
+        // Menangani klik pada textView
+        textView.setOnClickListener {
+            if (currentTitle != null && currentTarget != null && currentSaving != null && currentTipe != null && currentImageUri != null) {
+                val intent = Intent(requireContext(), DetailActivity::class.java).apply {
+                    putExtra("title", currentTitle)
+                    putExtra("target", currentTarget)
+                    putExtra("saving", currentSaving)
+                    putExtra("tipe", currentTipe)
+                    putExtra("imageUri", currentImageUri)
+                }
+                startActivity(intent)
+            }
+        }
+
         return view
     }
 
     fun updateContent(title: String?, target: String?, saving: String?, tipe: String?, imageUri: String?) {
+        currentTitle = title
+        currentTarget = target
+        currentSaving = saving
+        currentTipe = tipe
+        currentImageUri = imageUri
+
         if (!title.isNullOrEmpty()) {
             textView.text = title
             photoImageView.visibility = View.GONE
         }
 
-        // Update target, saving, tipe, serta tampilkan gambar menggunakan imageUri
+        // Update target, saving, dan tipe, serta tampilkan gambar menggunakan imageUri
         if (!target.isNullOrEmpty() && !saving.isNullOrEmpty() && !tipe.isNullOrEmpty() && !imageUri.isNullOrEmpty()) {
             // Tampilkan data sesuai kebutuhan
             val targetText = "Target: $target"
@@ -62,14 +87,13 @@ class FirstPageFragment : Fragment() {
         }
     }
 
-
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == MainActivity.REQUEST_CODE_NEW_PAGE && resultCode == Activity.RESULT_OK) {
             val title = data?.getStringExtra("title")
             val target = data?.getStringExtra("target")
             val saving = data?.getStringExtra("saving")
-            val tipe = data?.getStringExtra("tipe") // tambahkan parameter tipe
+            val tipe = data?.getStringExtra("tipe")
             val imageUri = data?.getStringExtra("imageUri")
 
             // Update content
