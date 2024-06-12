@@ -29,6 +29,7 @@ class NewPageActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_new_page)
 
+        // Initialize views
         photoImageView = findViewById(R.id.photoImageView)
         saveButton = findViewById(R.id.saveButton)
         tipeAutoCompleteTextView = findViewById(R.id.tipeAutoCompleteTextView)
@@ -36,20 +37,24 @@ class NewPageActivity : AppCompatActivity() {
         targetEditText = findViewById(R.id.targetEditText)
         menabungEditText = findViewById(R.id.menabungEditText)
 
+        // Set click listener to open image chooser
         photoImageView.setOnClickListener {
             openImageChooser()
         }
 
+        // Set click listener to save data and finish activity
         saveButton.setOnClickListener {
             saveDataAndFinish()
         }
 
+        // Set up autocomplete options for tipeAutoCompleteTextView
         val tipeOptions = arrayOf("Harian", "Mingguan", "Bulanan", "Tahunan")
         val adapter = ArrayAdapter(this, android.R.layout.simple_dropdown_item_1line, tipeOptions)
         tipeAutoCompleteTextView.setAdapter(adapter)
         tipeAutoCompleteTextView.setTokenizer(MultiAutoCompleteTextView.CommaTokenizer())
     }
 
+    // Open image chooser to select an image
     private fun openImageChooser() {
         val intent = Intent().apply {
             type = "image/*"
@@ -58,6 +63,7 @@ class NewPageActivity : AppCompatActivity() {
         startActivityForResult(Intent.createChooser(intent, getString(R.string.select_photo)), PICK_IMAGE_REQUEST)
     }
 
+    // Handle result from image chooser
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == PICK_IMAGE_REQUEST && resultCode == Activity.RESULT_OK && data != null && data.data != null) {
@@ -72,15 +78,21 @@ class NewPageActivity : AppCompatActivity() {
         }
     }
 
+    // Save data and finish the activity
+    // Save data and finish the activity
     private fun saveDataAndFinish() {
         val name = nameEditText.text.toString()
         val target = targetEditText.text.toString()
         val saving = menabungEditText.text.toString()
+        val tipe = tipeAutoCompleteTextView.text.toString() // Ambil teks dari tipeAutoCompleteTextView
 
         if (name.isNotEmpty() && target.isNotEmpty() && saving.isNotEmpty() && imageUri != null) {
             val intent = Intent().apply {
                 putExtra("title", name)
-                putExtra("iconResId", R.drawable.icon)
+                putExtra("target", target)
+                putExtra("saving", saving)
+                putExtra("tipe", tipe) // Tambahkan tipe ke dalam intent sebagai String
+                putExtra("imageUri", imageUri.toString())
             }
             setResult(Activity.RESULT_OK, intent)
             finish()
@@ -88,6 +100,7 @@ class NewPageActivity : AppCompatActivity() {
             Toast.makeText(this, "Please fill all fields and select an image", Toast.LENGTH_SHORT).show()
         }
     }
+
 
     companion object {
         private const val PICK_IMAGE_REQUEST = 1

@@ -48,13 +48,16 @@ class MainActivity : AppCompatActivity() {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == REQUEST_CODE_NEW_PAGE && resultCode == RESULT_OK) {
             val title = data?.getStringExtra("title")
-            val iconResId = data?.getIntExtra("iconResId", R.drawable.icon)?.toString()
+            val target = data?.getStringExtra("target")
+            val saving = data?.getStringExtra("saving")
+            val tipe = data?.getStringExtra("tipe")
+            val imageUri = data?.getStringExtra("imageUri")
 
+            // Use ViewPager2 to get the current fragment
             val fragment = supportFragmentManager.findFragmentByTag("f0") as? FirstPageFragment
-            fragment?.updateContent(title, iconResId)
+            fragment?.updateContent(title, target, saving, tipe, imageUri)
         }
     }
-
 
     companion object {
         const val REQUEST_CODE_NEW_PAGE = 1

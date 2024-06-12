@@ -9,12 +9,12 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.fragment.app.Fragment
+import com.bumptech.glide.Glide
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 class FirstPageFragment : Fragment() {
 
     private lateinit var textView: TextView
-    private lateinit var iconImageView: ImageView
     private lateinit var photoImageView: ImageView
 
     override fun onCreateView(
@@ -23,11 +23,10 @@ class FirstPageFragment : Fragment() {
     ): View? {
         val view = inflater.inflate(R.layout.fragment_first_page, container, false)
         textView = view.findViewById(R.id.textView)
-        iconImageView = view.findViewById(R.id.iconImageView)
-        photoImageView = view.findViewById(R.id.photoImageView) // Inisialisasi photoImageView
+        photoImageView = view.findViewById(R.id.photoImageView)
 
         // Default text and icon
-        iconImageView.visibility = View.VISIBLE // Mengubah visibilitas iconImageView menjadi visible
+        photoImageView.visibility = View.VISIBLE
         textView.text = "Upssss, Belum ada data impian nih"
 
         // Temukan FAB di layout
@@ -42,28 +41,39 @@ class FirstPageFragment : Fragment() {
         return view
     }
 
-    fun updateContent(title: String?, imageUri: String?) {
+    fun updateContent(title: String?, target: String?, saving: String?, tipe: String?, imageUri: String?) {
         if (!title.isNullOrEmpty()) {
             textView.text = title
-            iconImageView.visibility = View.GONE // Menghilangkan icon ketika ada data
+            photoImageView.visibility = View.GONE
         }
 
-        if (!imageUri.isNullOrEmpty()) {
-            // Load image from URI using your preferred method
-            // For example, Glide or Picasso
-            // Glide.with(this).load(imageUri).into(photoImageView)
-            photoImageView.visibility = View.VISIBLE // Menampilkan photoImageView ketika gambar diunggah
+        // Update target, saving, tipe, serta tampilkan gambar menggunakan imageUri
+        if (!target.isNullOrEmpty() && !saving.isNullOrEmpty() && !tipe.isNullOrEmpty() && !imageUri.isNullOrEmpty()) {
+            // Tampilkan data sesuai kebutuhan
+            val targetText = "Target: $target"
+            val savingText = "Menabung: $saving"
+            val tipeText = "Tipe: $tipe"
+            textView.text = "$title\n$targetText\n$savingText\n$tipeText"
+            // Tampilkan gambar menggunakan Glide
+            Glide.with(this).load(imageUri).into(photoImageView)
+            photoImageView.visibility = View.VISIBLE
+        } else {
+            photoImageView.visibility = View.GONE
         }
     }
+
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == MainActivity.REQUEST_CODE_NEW_PAGE && resultCode == Activity.RESULT_OK) {
             val title = data?.getStringExtra("title")
+            val target = data?.getStringExtra("target")
+            val saving = data?.getStringExtra("saving")
+            val tipe = data?.getStringExtra("tipe") // tambahkan parameter tipe
             val imageUri = data?.getStringExtra("imageUri")
 
             // Update content
-            updateContent(title, imageUri)
+            updateContent(title, target, saving, tipe, imageUri)
         }
     }
 }
