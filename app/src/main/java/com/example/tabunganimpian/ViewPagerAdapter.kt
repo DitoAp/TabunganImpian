@@ -12,7 +12,7 @@ class ViewPagerAdapter(fragmentActivity: FragmentActivity) : FragmentStateAdapte
 
     override fun createFragment(position: Int): Fragment {
         return when (position) {
-            0 -> FirstPageFragment()
+            0 -> FirstFragment()
             else -> SecondPageFragment()
         }
     }

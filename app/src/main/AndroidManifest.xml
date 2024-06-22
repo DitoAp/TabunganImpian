@@ -3,6 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.example.tabunganimpian">
 
+    <uses-permission android:name="android.permission.INTERNET"/>
+
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -32,9 +34,6 @@
             android:theme="@style/AppTheme" />
         <activity
             android:name=".NewPageActivity"
-            android:exported="false" />
-        <activity
-            android:name=".DetailPageActivity"
             android:exported="false" />
     </application>
 
