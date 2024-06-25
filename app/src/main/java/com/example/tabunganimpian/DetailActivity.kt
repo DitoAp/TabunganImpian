@@ -115,7 +115,11 @@ class DetailActivity : AppCompatActivity() {
             kurang = it.data?.target!!.toInt() - it.data?.total!!.toInt()
             terkumpul = it.data?.total!!.toInt()
             binding.textTerkumpul.text = "Terkumpul ${terkumpul.toString()}"
-            binding.textKurang.text = "Kurang ${kurang.toString()}"
+            if (kurang < 0) {
+                binding.textKurang.text = "Kurang ${0}"
+            } else {
+                binding.textKurang.text = "Kurang ${kurang.toString()}"
+            }
             GlideApp.with(baseContext)
                 .load("http://67.67.67.150:8000"+it.data?.image)
                 .into(binding.detailImage)

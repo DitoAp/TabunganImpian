@@ -11,7 +11,7 @@ class TabunganController extends Controller
 {
     public function getData()
     {
-        return response()->json(['data' => Tabungan::get()]);
+        return response()->json(['data' => Tabungan::where('status', false)->get()]);
     }
 
     public function getSuccess()
@@ -99,7 +99,7 @@ class TabunganController extends Controller
     public function destroy($id)
     {
         $data = Tabungan::where('id', $id)->first();
-        $this->deleteImage($data->image);
+        // $this->deleteImage($data->image);
         return $data->delete()
             ? response()->json(['message' => 'success'])
             : response()->json(['message' => 'error']);

@@ -121,25 +121,22 @@ class NewPageActivity : AppCompatActivity(), UploadRequestBody.UploadCallback {
         val saving = menabungEditText.text.toString()
         val tipe = tipeAutoCompleteTextView.text.toString() // Ambil teks dari tipeAutoCompleteTextView
 
-        if (name.isNotEmpty() && target.isNotEmpty() && saving.isNotEmpty() && imageUri != null) {
-            val parcelFileDescriptor = contentResolver.openFileDescriptor(imageUri!!, "r", null)?:return
-            val inputStream = FileInputStream(parcelFileDescriptor.fileDescriptor)
-            val file = File(cacheDir, contentResolver.getFileName(imageUri!!))
-            val outputStream = FileOutputStream(file)
-            inputStream.copyTo(outputStream)
-
-            val image = UploadRequestBody(file, "image", this)
+        if (name.isNotEmpty() && target.isNotEmpty() && saving.isNotEmpty()) {
             if (!isUpdate) {
                 if (imageUri == null) {
                     Toast.makeText(this, "Masukkan Gambar terlebih dahulu !!", Toast.LENGTH_SHORT).show()
                 }
+                val parcelFileDescriptor = contentResolver.openFileDescriptor(imageUri!!, "r", null)?:return
+                val inputStream = FileInputStream(parcelFileDescriptor.fileDescriptor)
+                val file = File(cacheDir, contentResolver.getFileName(imageUri!!))
+                val outputStream = FileOutputStream(file)
+                inputStream.copyTo(outputStream)
+
+                val image = UploadRequestBody(file, "image", this)
                 tabunganViewModel.createTabunganItem(RequestBody.create("multipart/form-data".toMediaTypeOrNull(), name), RequestBody.create("multipart/form-data".toMediaTypeOrNull(), tipe), RequestBody.create("multipart/form-data".toMediaTypeOrNull(), target), RequestBody.create("multipart/form-data".toMediaTypeOrNull(), "0.0"), RequestBody.create("multipart/form-data".toMediaTypeOrNull(), saving), MultipartBody.Part.createFormData("image", file.name, image), RequestBody.create(
                     "multipart/form-data".toMediaTypeOrNull(), "POST"
                 ))
             } else {
-//                tabunganViewModel.uploadImage(id, MultipartBody.Part.createFormData("image", file.name, image), RequestBody.create(
-//                    "multipart/form-data".toMediaTypeOrNull(), "POST"
-//                ))
                 tabunganViewModel.updateTabunganItem(id, name, tipe, target, total, saving)
             }
         } else {
