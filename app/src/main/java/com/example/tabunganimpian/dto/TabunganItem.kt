@@ -19,9 +19,12 @@ class TabunganItem : Serializable{
     @field:SerializedName("total")
     val total: String? = null
 
+    @field:SerializedName("menabung")
+    val savings: String? = null
+
     @field:SerializedName("image")
-    val imageTabungan: String? = null
+    val image: String? = null
 
     @field:SerializedName("status")
-    val statusTabungan: String? = null
+    val status: String? = null
 }

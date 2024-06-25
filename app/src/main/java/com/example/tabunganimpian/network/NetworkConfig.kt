@@ -6,6 +6,8 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 object NetworkConfig {
+
+    const val BASE_URL = "67.67.67.150:8000"
     private fun getInterceptor(): OkHttpClient {
         val logging = HttpLoggingInterceptor()
         logging.level = HttpLoggingInterceptor.Level.BODY
@@ -17,7 +19,7 @@ object NetworkConfig {
 
     private fun getRetrofit(): Retrofit {
         return Retrofit.Builder()
-            .baseUrl("http://192.168.100.13/api/")
+            .baseUrl("http://${BASE_URL}/api/")
             .client(getInterceptor())
             .addConverterFactory(GsonConverterFactory.create())
             .build()

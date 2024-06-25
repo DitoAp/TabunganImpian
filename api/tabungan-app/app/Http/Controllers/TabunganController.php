@@ -4,18 +4,23 @@ namespace App\Http\Controllers;
 
 use App\Models\Tabungan;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Storage;
 
 class TabunganController extends Controller
 {
-    public function getData() {
+    public function getData()
+    {
         return response()->json(['data' => Tabungan::get()]);
     }
 
-    public function getSuccess() {
+    public function getSuccess()
+    {
         return response()->json(['data' => Tabungan::where('status', true)->get()]);
     }
 
-    public function store(Request $request) {
+    public function store(Request $request)
+    {
         $name = Tabungan::where('name', $request->name)->first();
         if ($name) {
             return response()->json(['message' => 'Nama tabungan telah dipakai']);
@@ -25,13 +30,28 @@ class TabunganController extends Controller
             'tipe' => $request->tipe,
             'target' => $request->target,
             'total' => $request->total,
-            'image' => $request->image
+            'menabung' => $request->menabung,
+            'image' => $this->storeImage($request)
         ])
-        ? response()->json(['message' => 'success'])
-        : response()->json(['message' => 'error']);
+            ? response()->json(['message' => 'success'])
+            : response()->json(['message' => 'error']);
     }
 
-    public function update(Request $request, $id) {
+    public function storeImage($request)
+    {
+        $image = $request->file('image');
+        $image_uploaded_path = $image->store('tabungan', 'public');
+        return Storage::url($image_uploaded_path);
+    }
+
+    public function deleteImage($path)
+    {
+        $slice = explode('/', $path);
+        File::delete('storage/tabungan/' . $slice[3]);
+    }
+
+    public function update(Request $request, $id)
+    {
         $data = Tabungan::where('name', $request->name)->first();
         if ($data) {
             if ($data->name === $request->name && (int) $id === (int) $data->id) {
@@ -40,11 +60,11 @@ class TabunganController extends Controller
                     'tipe' => $request->tipe,
                     'target' => $request->target,
                     'total' => $request->total,
-                    'image' => $request->image
-                ]) 
-                ? response()->json(['message' => 'success'])
-                : response()->json(['message' => 'error']); 
-            } else {
+                    'menabung' => $request->menabung
+                ])
+                    ? response()->json(['message' => 'success'])
+                    : response()->json(['message' => 'error']);
+            } else if ($data->id === (int) $id) {
                 return response()->json(['message' => 'Nama tabungan telah dipakai !!!']);
             }
         } else {
@@ -53,16 +73,35 @@ class TabunganController extends Controller
                 'tipe' => $request->tipe,
                 'target' => $request->target,
                 'total' => $request->total,
-                'image' => $request->image
-            ]) 
-            ? response()->json(['message' => 'success'])
-            : response()->json(['message' => 'error']); 
+                'menabung' => $request->menabung
+            ])
+                ? response()->json(['message' => 'success'])
+                : response()->json(['message' => 'error']);
         }
     }
 
-    public function destroy($id) {
-        return Tabungan::where('id', $id)->delete()
+    public function updateImage(Request $request) {
+        $data = Tabungan::where('id', $request->id)->first();
+        // $this->deleteImage($data->image);
+        return $data->update([
+            'image' => $this->storeImage($request->file('image'))
+        ])
         ? response()->json(['message' => 'success'])
-        : response()->json(['message' => 'error']);
+        : response()->json(['error' => 'error']);
+    }
+
+    public function getDetail($id)
+    {
+        $data = Tabungan::where('id', $id)->first();
+        return response()->json(['data' => $data]);
+    }
+
+    public function destroy($id)
+    {
+        $data = Tabungan::where('id', $id)->first();
+        $this->deleteImage($data->image);
+        return $data->delete()
+            ? response()->json(['message' => 'success'])
+            : response()->json(['message' => 'error']);
     }
 }

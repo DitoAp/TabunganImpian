@@ -67,7 +67,7 @@ class TabunganItemsController extends Controller
         $data = Tabungan::where('id', $request->tabungan)->first();
         $total = $data->total;
         $total += $request->currency;
-        if ($data->total === $data->target) {
+        if ($data->total === $data->target || $data->total >= $data->target || $request->currency === $data->target || $request->currency >= $data->target) {
             Tabungan::where('id', $request->tabungan)->update([
                 'total' => $total,
                 'status' => true

@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('tipe');
             $table->string('target');
             $table->double('total')->default(0);
+            $table->string('menabung');
             $table->string('image');
             $table->boolean('status')->default(false);
             $table->timestamps();

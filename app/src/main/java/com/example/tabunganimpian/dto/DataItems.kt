@@ -16,6 +16,6 @@ class DataItems: Serializable {
     @field:SerializedName("currency")
     val currency: String? = null
 
-    @field:SerializedName("tabungan")
-    val tabungan: List<TabunganItem>? = null
+    @field:SerializedName("created_at")
+    val created_at: String? = null
 }

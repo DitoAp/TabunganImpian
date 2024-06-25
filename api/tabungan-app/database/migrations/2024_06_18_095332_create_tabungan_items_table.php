@@ -18,7 +18,7 @@ return new class extends Migration
             $table->double('currency');
             $table->timestamps();
 
-            $table->foreign('tabungan_id')->references('id')->on('tabungans');
+            $table->foreign('tabungan_id')->references('id')->on('tabungans')->onDelete('CASCADE');
         });
     }
 

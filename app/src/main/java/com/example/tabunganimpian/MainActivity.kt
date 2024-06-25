@@ -46,17 +46,17 @@ class MainActivity : AppCompatActivity() {
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        if (requestCode == REQUEST_CODE_NEW_PAGE && resultCode == RESULT_OK) {
-            val title = data?.getStringExtra("title")
-            val target = data?.getStringExtra("target")
-            val saving = data?.getStringExtra("saving")
-            val tipe = data?.getStringExtra("tipe")
-            val imageUri = data?.getStringExtra("imageUri")
-
-            // Use ViewPager2 to get the current fragment
-            val fragment = supportFragmentManager.findFragmentByTag("f0") as? FirstPageFragment
-            fragment?.updateContent(title, target, saving, tipe, imageUri)
-        }
+//        if (requestCode == REQUEST_CODE_NEW_PAGE && resultCode == RESULT_OK) {
+//            val title = data?.getStringExtra("title")
+//            val target = data?.getStringExtra("target")
+//            val saving = data?.getStringExtra("saving")
+//            val tipe = data?.getStringExtra("tipe")
+//            val imageUri = data?.getStringExtra("imageUri")
+//
+//            // Use ViewPager2 to get the current fragment
+//            val fragment = supportFragmentManager.findFragmentByTag("f0") as? FirstPageFragment
+//            fragment?.updateContent(title, target, saving, tipe, imageUri)
+//        }
     }
 
     companion object {

@@ -1,12 +1,16 @@
 package com.example.tabunganimpian
 
+import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import com.example.tabunganimpian.adapter.TabunganAdapter
 import com.example.tabunganimpian.databinding.FragmentFirstBinding
 import com.example.tabunganimpian.dto.TabunganItem
@@ -30,7 +34,10 @@ class FirstFragment : Fragment() {
 
     lateinit var binding: FragmentFirstBinding
     lateinit var tabunganViewModel: TabunganViewModel
-    lateinit var tabunganAdapter: TabunganAdapter
+    lateinit var detailActivity: DetailActivity
+    private lateinit var secondPageFragment: SecondPageFragment
+
+    val adapter = TabunganAdapter()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -45,22 +52,40 @@ class FirstFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentFirstBinding.inflate(inflater, container, false)
-        binding.recyclerView.adapter = tabunganAdapter
-        initViewModel()
-
         return binding.root
     }
 
-    fun initViewModel() {
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        binding.recyclerView.adapter = adapter
+
+        binding.normalFAB.setOnClickListener {
+            val intent = Intent(requireContext(), NewPageActivity::class.java)
+            startActivityForResult(intent, MainActivity.REQUEST_CODE_NEW_PAGE)
+        }
+
+
+        tabunganViewModel = ViewModelProvider(this)[TabunganViewModel::class.java]
         tabunganViewModel.getTabunganItemObserverable().observe(viewLifecycleOwner, Observer<ResultTabungan> {
-            if (it == null) {
+            if (it.dataTabungan!!.isEmpty()) {
                 Toast.makeText(context, "no result found...", Toast.LENGTH_SHORT).show()
             } else {
-                tabunganAdapter.data = it.dataTabungan!!.toMutableList()
-                tabunganAdapter.notifyDataSetChanged()
+                adapter.data = it.dataTabungan!!.toMutableList()
+                adapter.notifyDataSetChanged()
             }
         })
         tabunganViewModel.getTabunganItem()
+
+        adapter.setOnClickListener(object: TabunganAdapter.OnClickListener {
+            override fun onClick(position: Int, model: TabunganItem) {
+                val intent = Intent(requireContext(), DetailActivity::class.java).apply {
+                    putExtra("id", model.tabunganId)
+                }
+                startActivity(intent)
+            }
+
+        })
     }
 
     companion object {
